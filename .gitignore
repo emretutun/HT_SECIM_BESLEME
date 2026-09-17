@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# --- HT SECIM BESLEME ---
+# Servisin calisirken urettikleri; depoya girmemeli.
+LOG/
+akis/
+hedef.json
+veri.json
