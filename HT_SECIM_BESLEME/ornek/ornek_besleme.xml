@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ORNEK BESLEME DOSYASI
+
+  Bunu "besleme\gelen" klasorune kopyalayip servisin okuyup okumadigini
+  gorebilirsiniz. Gercek akis 2. adimda uretici ile gelecek.
+
+  DIKKAT - dosyada OLMAYAN seyler:
+    - yuzdeler          : API ham sayidan hesapliyor
+    - Turkiye geneli    : API illerden topluyor
+    - milletvekili      : API D'Hondt ile hesapliyor
+
+  Besleme yalnizca HAM SAYI tasir. Turetilen her sey tek yerde kalir,
+  boylece ekranin altiyla ustu birbiriyle celisemez.
+-->
+
+<besleme kaynak="PROVA" uretim="2027-05-14T21:15:00" sira="1">
+
+  <secim kod="MV_2023">
+
+    <il plaka="1" toplamSandik="5610" acilanSandik="5355"
+        secmenSayisi="1620450" gecerliOy="1298120" gecersizOy="26890">
+      <oy kod="AKP"    sayi="563180" />
+      <oy kod="CHP"    sayi="324900" />
+      <oy kod="MHP"    sayi="151880" />
+      <oy kod="IYI"    sayi="106200" />
+      <oy kod="YSP"    sayi="46200"  />
+      <oy kod="YRP"    sayi="29860"  />
+      <oy kod="ZP"     sayi="41520"  />
+      <oy kod="TIP"    sayi="19420"  />
+      <oy kod="SAADET" sayi="14960"  />
+    </il>
+
+    <il plaka="6" toplamSandik="12658" acilanSandik="12381"
+        secmenSayisi="3985412" gecerliOy="3210554" gecersizOy="41208">
+      <oy kod="AKP"    sayi="1023441" />
+      <oy kod="CHP"    sayi="922310"  />
+      <oy kod="IYI"    sayi="563498"  />
+      <oy kod="MHP"    sayi="238222"  />
+      <oy kod="ZP"     sayi="117827"  />
+      <oy kod="TIP"    sayi="95032"   />
+      <oy kod="SAADET" sayi="93106"   />
+      <oy kod="YSP"    sayi="88118"   />
+    </il>
+
+    <il plaka="34" toplamSandik="41900" acilanSandik="40650"
+        secmenSayisi="11400000" gecerliOy="9120000" gecersizOy="182000">
+      <oy kod="AKP"    sayi="3192000" />
+      <oy kod="CHP"    sayi="2827200" />
+      <oy kod="IYI"    sayi="820800"  />
+      <oy kod="YSP"    sayi="729600"  />
+      <oy kod="MHP"    sayi="638400"  />
+      <oy kod="YRP"    sayi="273600"  />
+      <oy kod="ZP"     sayi="364800"  />
+      <oy kod="TIP"    sayi="273600"  />
+    </il>
+
+  </secim>
+
+  <secim kod="CB_2023">
+
+    <il plaka="1" toplamSandik="5610" acilanSandik="5355"
+        secmenSayisi="1620450" gecerliOy="1305400" gecersizOy="19610">
+      <oy kod="RTE" sayi="712400" />
+      <oy kod="KK"  sayi="518600" />
+      <oy kod="SO"  sayi="68200"  />
+      <oy kod="MI"  sayi="6200"   />
+    </il>
+
+    <il plaka="6" toplamSandik="12658" acilanSandik="12381"
+        secmenSayisi="3985412" gecerliOy="3228900" gecersizOy="22850">
+      <oy kod="RTE" sayi="1387400" />
+      <oy kod="KK"  sayi="1620300" />
+      <oy kod="SO"  sayi="205600"  />
+      <oy kod="MI"  sayi="15600"   />
+    </il>
+
+    <il plaka="34" toplamSandik="41900" acilanSandik="40650"
+        secmenSayisi="11400000" gecerliOy="9180000" gecersizOy="122000">
+      <oy kod="RTE" sayi="4130000" />
+      <oy kod="KK"  sayi="4498000" />
+      <oy kod="SO"  sayi="508000"  />
+      <oy kod="MI"  sayi="44000"   />
+    </il>
+
+  </secim>
+
+</besleme>

@@ -1,0 +1,196 @@
+﻿//-------------------------------------------------------------
+//  BESLEME SERVISI AYARLARI
+//
+//  Ajanstan gelen anlik goruntu dosyalarini izleyen, dogrulayan ve
+//  API'ye gonderen servisin ayarlari.
+//
+//  Duz metin: "anahtar = deger". "//" ile baslayan satirlar yorum.
+//  Adres ya da klasor degisince yeniden derlemek gerekmiyor.
+//
+//  DIKKAT: satirlar "=" ile bolunur, deger icinde "=" kullanma.
+//-------------------------------------------------------------
+
+
+//=============================================================
+//  KLASORLER
+//
+//  Ajans dosyalari GELEN klasorune birakir. Servis onlari okur ve
+//  sonuclarina gore ARSIV ya da HATALI klasorune tasir.
+//
+//  Yollar goreli verilirse exe'nin yanina gore cozulur; mutlak yol
+//  da yazilabilir (\\sunucu\secim\gelen gibi).
+//=============================================================
+
+GELEN  = akis\gelen
+ARSIV  = akis\arsiv
+HATALI = akis\hatali
+
+
+//=============================================================
+//  DOSYA DESENI
+//
+//  Klasorde bu desene uyan dosyalar islenir. Ajansin gecici
+//  dosyalari (.tmp, .part) boylece disarida kaliyor.
+//=============================================================
+
+DESEN = *.xml
+
+
+//-------------------------------------------------------------
+//  TARAMA_ARALIK  -  klasore kac saniyede bir bakilacak
+//
+//  FileSystemWatcher ag surucusunde olay kacirabiliyor; servis
+//  ayrica duzenli olarak klasoru tariyor. Ajans 30-60 saniyede
+//  bir dosya birakiyorsa 5 saniye fazlasiyla yeterli.
+//-------------------------------------------------------------
+
+TARAMA_ARALIK = 5
+
+
+//-------------------------------------------------------------
+//  DOSYA BITTI MI  -  FTP'nin klasik tuzagi
+//
+//  Klasorde dosyanin gorunmesi, dosyanin BITMIS olmasi demek
+//  degil. Yarim yazilmis dosyayi okuyup yayina vermek bu isin en
+//  sik hatasi.
+//
+//  Servis iki sarti birden ariyor:
+//
+//    1. Dosya boyutu SAKINLIK saniye boyunca degismedi
+//    2. Dosya ozel erisimle acilabiliyor (baskasi yazmiyor)
+//
+//  Ajans "once .tmp yaz, sonra adini degistir" yapabiliyorsa
+//  SAKINLIK 1'e indirilebilir; rename atomiktir.
+//-------------------------------------------------------------
+
+SAKINLIK = 3
+
+//  Bir dosya bu kadar saniye "bitmedi" gorunurse vazgecilir ve
+//  hatali klasorune tasinir. Yarim kalmis yuklemeler burada takilir.
+
+BEKLEME_SINIRI = 120
+
+
+//=============================================================
+//  API
+//
+//  Dogrulanan anlik goruntunun gonderilecegi adres.
+//  ANAHTAR, API'nin appsettings.json dosyasindaki YAZMA anahtari.
+//=============================================================
+
+API_ADRES   = http://localhost:5188
+API_ZAMANASIMI = 30
+
+//  Anlik goruntuyu gondermek icin YAZMA anahtari.
+
+API_ANAHTAR = HT-SECIM-YAZMA-2027
+
+//  Uretici hedef veriyi cekerken kullandigi OKUMA anahtari.
+
+API_OKUMA_ANAHTAR = HT-SECIM-OKUMA-2027
+
+
+//=============================================================
+//  DOGRULAMA
+//
+//  Bu esikler gece boyunca degistirilebilsin diye burada.
+//=============================================================
+
+//  Bir ilde acilan sandik TEK DOSYADA bu yuzdeden fazla artarsa
+//  dosya gecirilir ama alarm yazilir. Gece basinda buyuk siçramalar
+//  normal, ilerleyen saatlerde degil.
+
+SICRAMA_UYARI = 20
+
+//  Anlik goruntude en az kac il bekliyoruz. Bunun altindaysa dosya
+//  reddedilir - ajans yarim liste gondermis demektir.
+//  81 il + yurtdisi + gumruk = 83.
+
+ASGARI_IL = 81
+
+//  NOT: Geri gitme korumasi (yeni dosya bir ilde daha DUSUK acilan
+//  sandik ya da daha AZ oy getiriyorsa dosyanin tamami reddedilir)
+//  API tarafinda yapiliyor - kontrol ancak canli veriyle
+//  karsilastirilarak yapilabilir. Burada bir ayari yok.
+
+
+//=============================================================
+//  URETICI  (prova modu)
+//
+//  Gercek ajans yokken akisi taklit eder: mevcut secim sonucunu
+//  hedef alip sifirdan oraya dogru dosya uretir ve GELEN klasorune
+//  birakir. Izleyici farki anlamaz - zincirin tamami gercek calisir.
+//
+//  Gercek ajans baglaninca URETICI = 0 yapilir, baska hicbir sey
+//  degismez.
+//=============================================================
+
+URETICI = 0
+
+//  Kac saniyede bir dosya uretilecek.
+
+URETICI_ARALIK = 30
+
+//  Sandiklarin tamaminin acilmasi kac DAKIKA surecek.
+//  Gercek gece ~6 saat (360); prova icin 10 dakika yeterli.
+
+URETICI_SURE = 10
+
+//  Uretilecek secimler. Virgulle ayrilir.
+
+URETICI_SECIMLER = CB_2023, MV_2023
+
+//-------------------------------------------------------------
+//  URETICI_SIFIRLA
+//
+//  Prova baslarken API''deki sayaclari sifirlar: acilan sandik 0,
+//  butun oylar 0. Toplam sandik ve secmen sayisi kalir.
+//
+//  Gerekli, cunku veritabaninda nihai sonuclar duruyor ve prova
+//  sifirdan basliyor; geri gitme korumasi aksi halde her dosyayi
+//  hakli olarak reddeder.
+//
+//  GERCEK YAYINDA 0 OLMALI. Ayni islemi gece basinda elle yapmak
+//  icin: POST /api/v1/besleme/sifirla
+//-------------------------------------------------------------
+
+URETICI_SIFIRLA = 1
+
+//  Uretilen dosyalarin kaynak adi.
+
+URETICI_KAYNAK = PROVA
+
+//-------------------------------------------------------------
+//  URETICININ VARSAYIMLARI
+//
+//  API yuzde olarak veri veriyor (katilim, acilan sandik); besleme
+//  ise HAM SAYI tasimali. Aradaki ham sayilar asagidaki iki
+//  varsayimla turetiliyor. Gercek ajans geldiginde bu varsayimlarin
+//  hicbir onemi kalmaz - o zaman ham sayilari ajans gonderir.
+//
+//  GECERSIZ_YUZDE     : gecerli oyun yuzde kaci kadar gecersiz oy
+//                       varsayilacak (2023 MV'de ~%2-3)
+//  SANDIK_BASINA_SECMEN : bir sandiga kac secmen dusuyor (~300)
+//-------------------------------------------------------------
+
+GECERSIZ_YUZDE       = 2.5
+SANDIK_BASINA_SECMEN = 300
+
+//-------------------------------------------------------------
+//  ACILIS DALGASI
+//
+//  Turkiye''de dogu illerinde oy verme daha erken bitiyor, sonuclar
+//  once oradan geliyor. Uretici illeri bolgelerine gore dalgalar
+//  halinde aciyor.
+//
+//  Deger, o bolgenin toplam surenin yuzde kacinda acilmaya
+//  baslayacagi. 0 = en basta, 50 = surenin yarisinda.
+//-------------------------------------------------------------
+
+DALGA = DOĞU ANADOLU        = 0
+DALGA = GÜNEYDOĞU ANADOLU   = 5
+DALGA = KARADENİZ           = 12
+DALGA = İÇ ANADOLU          = 20
+DALGA = AKDENİZ             = 26
+DALGA = EGE                 = 32
+DALGA = MARMARA             = 38
